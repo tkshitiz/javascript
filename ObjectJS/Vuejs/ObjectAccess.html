@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Javascript Learning</title>
+    <!-- Objects in javascript -->
+    <script type="text/javascript">
+        var Car=
+        {
+            car_brand:"tesla",
+            car_model:"Model 3",
+            price:350000,
+            carDescription : function()
+            {
+                 return "The car has whole car description.";  
+            }
+        }
+        Car.fuelType="electric";
+        
+        document.write("<h2>"+typeof(Car)+"</h2>");
+
+         
+
+       
+
+         function Cars(car_brand,car_model,price)
+         {
+             this.car_brand=car_brand;
+             this.car_model=car_model;
+             this.price=price;
+             this.carDescription = function(){
+                document.write("<h2>this car has whole car description.</h2>");
+             }
+
+         }
+            
+
+         var c1=new Cars("tesla","model 3",39000);
+         c1.carDescription();
+         document.write("<h2>"+c1.price+"</h2>");
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

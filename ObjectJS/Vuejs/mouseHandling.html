@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse handling</title>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+    <div id="mouseEvent">
+       <div class="move-area" @mousemove="movefunction" style="height:200px; width:200px;border:1px solid">
+        <span>{{ x }},{{ y }}</span>
+        
+        </div>
+        <button v-on:mouseover="overfunction" @mouseout="outfunction">MouseOver&MouseOut</button>
+        
+    </div>
+
+    <script>
+var mouseEvent=new Vue({
+ el:"#mouseEvent",
+ data:{
+     x:0,
+     y:0
+ },
+    methods:
+    { 
+      movefunction:function(event){
+        this.x=event.offsetX;
+        this.y=event.offsetY;
+        },
+
+        overfunction:function()
+        {
+         console.log("this is the message due to mouseover");
+        },
+        
+        outfunction:function()
+        {
+         console.log("this is the message due to mouseout");
+        }  
+    }
+});
+    </script>
+</body>
+</html>

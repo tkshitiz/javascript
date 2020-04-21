@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Rendering in VueJS</title>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+   
+    <div id="ListRendering">
+      <ul>
+          <li v-for="student in students" >
+                {{student}}
+
+          </li>
+      </ul>
+      <ul>
+          <li v-for="teacher in teachers">
+                 {{teacher.name}}--{{teacher.subject}} from {{teacher.location.street}},{{teacher.location.city}}
+          </li>
+        </ul> 
+        
+        <h2>Second way to view the list.</h2>
+        <ul>
+            <li v-for="teacher in teachers">
+                {{teacher.name}} teaches {{teacher.subject}}
+                <p v-for="(addr,index) in teacher.location">
+                    {{index}}-->{{addr}}
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+     new Vue({
+        el:"#ListRendering",
+        data:{
+            students:["kshitiz"," ramesh","thapa","vatiz"],
+            teachers:[
+                {name:"teacher1",subject:"science",location:{street:"satdobato",city:"lalitpur"}},
+                {name:"teacher2",subject:"math",location:{street:"pachthar",city:"janakpur"}},
+                {name:"teacher3",subject:"english",location:{street:"bharahawa",city:"siraha"}}
+            ]
+        },
+      
+     });
+
+    </script>
+</body>
+</html>

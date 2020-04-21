@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computed Properties in VueJS</title>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+   
+    <div id="computedProperties">
+       First name:<input type="text" v-model="firstName" placeholder="Enter First Name">{{firstName}}<br><br>
+       Last Name:<input type="text" v-model="lastName" placeholder="Enter Last Name">{{lastName}}<br><br>
+       <h2>Full Name: {{getFullName}}</h2><br><br>
+
+       <input type="text" v-model="meter" placeholder="Enter length in meter"><br>
+       <h2>Length in Centimeter: {{ convertToCm }}</h2><br>
+
+       Maths:<input type="text" v-model="maths">
+       Science:<input type="text" v-model="science">
+       English:<input type="text" v-model="english"><br>
+       <h2>Total: {{ total }}</h2>
+
+    </div>
+
+    <script>
+     new Vue({
+        el:"#computedProperties",
+        data:{
+            firstName:"",
+            lastName:"",
+            meter:"",
+            maths:"",
+            english:"",
+            science:""
+        },
+        computed:
+        {
+            getFullName:function()
+            {
+                return this.firstName+" "+this.lastName;    
+            },
+            convertToCm:function()
+            {             
+              return this.meter*100;
+
+            },
+            total:function()
+            {
+                return parseInt(this.maths)+parseInt(this.english)+parseInt(this.science);
+            }
+            
+
+        }
+     });
+
+    </script>
+</body>
+</html>
