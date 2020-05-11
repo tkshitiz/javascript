@@ -26,7 +26,7 @@ export default{
     
     myplaylist:{
       type:Array
-    },  
+    },
   
     laptopName:{
       type:String
