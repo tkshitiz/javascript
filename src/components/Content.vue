@@ -11,6 +11,14 @@
            
         </li>
     </ul>
+    <ul>
+      <li v-for="student in students">
+         {{student}}
+      </li>
+    </ul>
+    <h3>Content ko:</h3>
+    <button v-on:click="deleteStudent">Delete Student</button>
+    <h3>Simple Message: {{someMessage}}</h3>
   </div>
 </template>
 
@@ -18,6 +26,14 @@
 export default{
   // props:["name","myplaylist","laptopName"],
   props:{
+    someMessage:{
+      type:String
+    },
+
+    students:{
+       type:Array
+    },
+
     name:{
       type:String,
       default:"Default name"
@@ -35,16 +51,22 @@ export default{
   },
   data () {
     return {  
-       
+     
     }
-  }
+  },
+
+    methods:{
+       deleteStudent:function(){
+         this.students.pop();
+       }
+      }
 }
 
 </script>
 
 <style scoped>
 h3{
-  color:red;
+  color:blue;
   font-size:30px
 }
 </style>

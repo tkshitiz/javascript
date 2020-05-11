@@ -2,17 +2,20 @@
 
   <div>
      <h3><msgheader></msgheader></h3>
-     <playlist  name="kshitiz thapa" laptop-name="dell inspiron" v-bind:myplaylist="playlists"></playlist>
+     <student v-bind:some-message="someMessage"  v-bind:students="students"></student>
+     <playlist v-bind:some-message="someMessage" v-bind:students="students" name="kshitiz thapa" laptop-name="dell inspiron" v-bind:myplaylist="playlists"></playlist>
   </div>
 </template>
 
 <script>
 import Header  from './components/Header.vue'
 import Content from './components/Content.vue'
+import Student from './components/Student.vue'
 export default {
 components:{
   "msgheader":Header,
-  "playlist":Content
+  "playlist":Content,
+  "student": Student
 },
   data () {
     return {  
@@ -34,7 +37,15 @@ components:{
             url:'https://angularjs.org/',
             title:'angular'
             }
-        ]
+        ],
+        students:[
+          "Kshitiz Thapa",
+          "Shruti Gautam",
+          "thapa kshitiz",
+          "gautam shruti"
+          
+        ],
+        someMessage: "Simple Message Defined here"
 
     }
   }
