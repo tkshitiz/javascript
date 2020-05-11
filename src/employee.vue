@@ -17,7 +17,7 @@ export default {
     return {
       
       msg: 'Welcome to employee vue',
-      employee:['kshtiiz thapa','harsith thapa','katuwal thapa']
+      employee:['kshitiz thapa','harsith thapa','katuwal thapa']
 
     }
   }
