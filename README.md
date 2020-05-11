@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # learn-vue-cli
 
 > this is a simple project of simple vue-cli
@@ -16,3 +17,6 @@ npm run build
 ```
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+# javascript
+>>>>>>> 7c5064dfe64af04ea9f33178371e348c9bf5960d

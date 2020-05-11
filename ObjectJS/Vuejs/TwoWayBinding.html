@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Way Data Binding</title>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+</head>
+<body>
+    <div id="Databinding">
+        <!-- Two way data binding -->
+      <input type="text" name="name" v-model="name">{{name}}<br>
+      <input type="email" name="email" v-model="email">{{email}}<br>
+      <!-- End of two way data binding -->
+
+      <input type="text" @keypress="keypressfunction">{{keypress}}
+    </div>
+       
+
+    <script>
+var Databinding=new Vue({
+ el:"#Databinding",
+ data:{
+    name:"kshitiz",
+    email:"kshitiz184@gmail.com",
+    keypress:"k"
+ },
+    methods:
+    { 
+        keypressfunction:function(event){
+        this.keypress=event.key;
+        },
+        
+    }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components in  Vuejs</title>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script> 
+</head>
+<body>
+    <div id="component1">
+        
+        <kshitiz></kshitiz>
+    </div>
+
+    <div id="component2">
+        <kshitiz></kshitiz>
+    </div>
+
+    <script>
+
+    // ************** CONTAINER ************************
+     var data={
+        name:"kshitiz",
+        address:"satdobato"
+      }
+    // ************** END OF CONTAINER *****************
+   
+    Vue.component("kshitiz",{
+        template:
+       "<p>Hi ! I am {{name}} from {{address}} and this is from method:{{method1()}}<button @click='fire'>click me</button></p>",
+        data:function(){
+            return data;
+        },
+        methods:{
+            method1: function()
+            {
+                return "This is method1."
+            },
+
+            fire: function()
+            {
+                return this.name='thapa'
+            }
+
+        }
+    });
+
+   var component1=new Vue({
+      el:"#component1",
+      data:{
+         hello:"sdfdfdfds"
+      },
+      methods:{
+         
+      },
+  });
+
+  var component2=new Vue({
+      el:"#component2",
+      data:{
+         
+      },
+      methods:{
+         
+      },
+  });
+    </script>
+</body>
+</html>

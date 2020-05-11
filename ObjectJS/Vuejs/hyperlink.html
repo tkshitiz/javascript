@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>first code with Vuejs</title>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script> 
+</head>
+<body>
+    <div id="app">
+        
+        <a v-bind:href="ulink" v-bind:title="title">{{title}}</a>
+        <form action="#" method="POST">
+            <input type="text" v-bind:value="txtName">
+            <input type="text" v-bind:value="txtEmail">
+            <input type="submit" value="submit">
+        </form>
+        
+         <div v-html="htmlText"></div>
+        
+    
+    </div>         
+    <script>
+  new Vue({
+      el:"#app",
+      data:{
+          title:"Youtube",
+          ulink:"https://www.youtube.com/watch?v=BqCaoGuRDC4&list=PLT9miexWCpPUZ-xD9s70PhhP37blPSuax&index=4",
+          txtName:'kshitiz thapa',
+          txtEmail:'kshitiz184@gmail.com',
+          htmlText:"<h2>hello this is HTML txt from vue instance properties.</h2>" 
+      }
+  });
+    </script>
+</body>
+</html>

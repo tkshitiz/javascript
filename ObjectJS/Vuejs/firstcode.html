@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>first code with Vuejs</title>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script> 
+</head>
+<body>
+    <div id="our-app">
+        Hi! I am {{fname}} from {{address}}.
+    </div>
+
+    <script>
+  new Vue({
+      el:"#our-app",
+      data:{
+          message:"this is our first code",
+          fname:"kshitiz thapa",
+          address:"satdobato,lalitpur"
+      }
+  });
+    </script>
+</body>
+</html>
