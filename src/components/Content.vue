@@ -21,7 +21,6 @@ export default{
     name:{
       type:String,
       default:"Default name"
-      
     },
     
     myplaylist:{
