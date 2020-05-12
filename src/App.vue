@@ -1,28 +1,27 @@
 <template>
 
   <div>
-    
-     <student v-bind:message="msg" v-on:updateParentVariable="updateValueFn($event)"></student>
+    <student></student>
+    <employee></employee>
   </div>
 </template>
 
 <script>
 import Student from './components/Student.vue'
+import Employee from './components/Employee.vue'
 export default {
 components:{
-  "student": Student
+  "student": Student,
+   "employee":Employee
 },
   data () {
     return {  
-         msg: "Passing data from Parent to Child component"
+        
     }
   },
   methods:
   {
-     updateValueFn:function(updatedValue)
-     {
-         this.msg=updatedValue
-     }
+     
   }
 
 }
