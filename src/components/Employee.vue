@@ -19,10 +19,10 @@ export default{
     
   },
 
-// *******************Receiving data from employee.vue
+// *******************Receiving data from Student.vue****************//
   mounted(){
       EventBus.$on("emittedData",data=>{
-       this.message=data
+       this.message=data 
       })
   }
 }
