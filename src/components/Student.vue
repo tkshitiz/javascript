@@ -1,31 +1,27 @@
 <template>
 
   <div>
-  <h2>Students List</h2>
-  <ul>
-      <li v-for="student in students">{{student}}</li>
-  </ul>
-    <h3>Simple Message: {{someMessage}}</h3>
+      <h2>{{message}}</h2>
+      <button v-on:click="updateFromChild">update from child</button>
   </div>
 </template>
 
 <script>
 export default{
-  
-  props:{
-   
-    someMessage:{
-      type:String
-    },
-
-   students:{
-       type:Array
-   } 
-  },
-  data () {
+  props:["message"],
+ 
+  data () { 
     return {  
        
     }
+  },
+  methods:
+  {
+     updateFromChild:function()
+     {
+      //  this.message="updated from child"
+      this.$emit("updateParentVariable"," value updated from child");
+     }
   }
 }
 
