@@ -1,13 +1,29 @@
 <template>
 
   <div>
-      
-      <button v-on:click="passData()">click here to send data</button>
+    <slot>This is default slot message</slot>
+      <form action="">
+        
+        <div id="form-header">
+          <slot name="form-header"></slot>
+        </div>
+
+        <div id="form-elements">
+          <slot name="form-elements"></slot>
+        </div>
+
+        <div id="form-button">
+          <slot name="form-button"></slot>
+        </div>
+
+          <div id="form-footer">
+            <slot name="form-footer"></slot>
+          </div>
+      </form>
   </div>
 </template>
 
 <script>
-import {EventBus} from '../main'
 export default{
  
   data () { 
@@ -17,11 +33,7 @@ export default{
   },
   methods:
   {
-     passData:function()
-     {
-      // console.log("this is a simple message.")
-      EventBus.$emit("emittedData","this is a simple message.")
-     }
+     
   }
 }
 

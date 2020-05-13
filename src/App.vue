@@ -1,22 +1,38 @@
 <template>
 
   <div>
-    <student></student>
-    <employee></employee>
+    <student-form>
+      {{msg}}
+        <div slot="form-header">
+          <h3>Student form</h3>
+        </div>
+
+        <div slot="form-elements">
+          <p><input type="text" placeholder="enter name"></p>
+          <p><input type="email" placeholder="enter email"></p>
+        </div>
+
+        <div slot="form-button">
+          <button v-on:click="submitDetails()">Submit</button>
+        </div>
+
+         <div slot="form-footer">
+          <p>This is form footer.</p>
+        </div>
+      </student-form>
+    
   </div>
 </template>
 
 <script>
 import Student from './components/Student.vue'
-import Employee from './components/Employee.vue'
 export default {
 components:{
-  "student": Student,
-   "employee":Employee
+  "student-form": Student 
 },
   data () {
     return {  
-        
+        msg:"Passing data from parent to child"
     }
   },
   methods:

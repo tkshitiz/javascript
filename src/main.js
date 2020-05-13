@@ -10,7 +10,6 @@ Vue.component("student",student);
 
 /******************Global instance-to-pass-receive-data*************************/  
 export const EventBus=new Vue();
-
 /******************Global instance-to-pass-receive-data*************************/  
 
 new Vue({
