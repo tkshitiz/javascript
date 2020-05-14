@@ -1,25 +1,26 @@
 <template>
 
   <div>
-    <slot>This is default slot message</slot>
-      <form action="">
-        
-        <div id="form-header">
-          <slot name="form-header"></slot>
-        </div>
+   <h3>Student form:</h3>
+       <form action="">
+         <p> 
+           <label for="name">Name:</label>
+           <input type="text" name="txtStudentName">
+         </p>
 
-        <div id="form-elements">
-          <slot name="form-elements"></slot>
-        </div>
+          <p> 
+           <label for="class">Class:</label>
+           <input type="text" name="txtStudentClass">  
+         </p>
 
-        <div id="form-button">
-          <slot name="form-button"></slot>
-        </div>
-
-          <div id="form-footer">
-            <slot name="form-footer"></slot>
-          </div>
-      </form>
+          <p> 
+           <label for="mobileNo">mobileNo:</label>
+           <input type="text" name="txtStudentmobileNo">
+         </p>
+         <p>
+          <button>Submit</button>
+          </p>
+       </form>
   </div>
 </template>
 
