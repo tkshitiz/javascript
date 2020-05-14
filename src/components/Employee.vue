@@ -5,23 +5,31 @@
        <form action="">
          <p> 
            <label for="name">Name:</label>
-           <input type="text" name="txtEmployeeName">
+           <input type="text" v-model.lazy="employee.name" name="txtEmployeeName">
          </p>
 
-          <p> 
+          <p>
            <label for="officeName">Company Name:</label>
-           <input type="text" name="txtCompanyName">  
+           <input type="text" v-model.lazy="employee.companyName" name="txtCompanyName">  
          </p>
 
           <p> 
            <label for="mobileNo">mobileNo:</label>
-           <input type="text" name="txtEmployeemobileNo">
+           <input type="text" v-model.lazy="employee.mobileNo" name="txtEmployeemobileNo">
          </p>
          <p>
           <button>Submit</button>
           </p>
        </form>
+       <div>
+          <H3>Employee details preview</H3>
+          <p>Employee name: {{employee.name}}</p>
+          <p>Company name: {{employee.companyName}}</p>
+          <p>Moblie No: {{employee.mobileNo}}</p> 
+       </div>
   </div>
+
+
 </template>
 
 <script>
@@ -30,7 +38,11 @@ export default{
  
   data () { 
     return {  
-       message:"Default message"
+             employee:{
+             name:"",
+             companyName:"",
+             mobileNo:""
+           }  
     }
   },
   methods:

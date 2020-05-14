@@ -1,14 +1,7 @@
 <template>
 
   <div>
-    <!-- preserving the input value -->
-    <keep-alive> 
-    <component v-bind:is="msg"></component>
-    </keep-alive>
-    <!-- preserving the input value -->
-
-    <button v-on:click="msg='student-form'">Student form</button>
-    <button v-on:click="msg='employee-form'">Employee form</button>
+      <employee-form></employee-form>
   </div>
 </template>
 
