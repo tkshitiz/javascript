@@ -24,7 +24,16 @@
           <label><input type="checkbox" v-model="employee.posts" value="CEO">CEO</label>
           <label><input type="checkbox" v-model="employee.posts" value="Tester">Tester</label>
          </p>
-
+             
+         <p>
+           <input type="radio" value="Male" v-model="employee.gender">Male
+           <input type="radio" value="Female" v-model="employee.gender">Female
+         </p>
+         <p>
+           <select v-model="employee.level">
+             <option v-for="level in levels">{{level}}</option>
+           </select>
+         </p>
          <p>
         <button>Submit</button>
         </p>
@@ -34,12 +43,13 @@
           <p>Employee name : {{ employee.name }}</p>
           <p>Company name  : {{ employee.companyName }}</p>
           <p>Moblie No     : {{ employee.mobileNo }}</p> 
-           
+           <p>Gender: {{employee.gender}}</p>
+
            <h3>Employee Occupation:</h3>
           <ul>
             <li v-for="post in employee.posts">{{post}}</li>
           </ul>
-
+         <h3>employee level: <span style="color:black;">{{ employee.level}}</span></h3>
        </div>
   </div>
 
@@ -56,8 +66,11 @@ export default{
              name:"",
              companyName:"",
              mobileNo:"",
-             posts:[]
-           }  
+             posts:[],
+             gender:""
+             
+           },
+           levels:["Football","singing","dancing","swimming"]  
     }
   },
   methods:
