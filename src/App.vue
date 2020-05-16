@@ -1,26 +1,60 @@
 <template>
 
   <div>
-      <employee-form></employee-form>
+  
+       <h3>Employee form:</h3>
+       <form action="">
+         <p> 
+           <label for="title">Title:</label>
+           <input type="text" v-model.lazy="blog.title">
+         </p>
+
+          <p>
+           <label for="description">Description:</label>
+           <input type="text" v-model.lazy="blog.description">  
+          </p>
+      
+         <p>
+          <button v-on:click.prevent="postBlog">submit</button>
+        </p>
+       </form>
+       <div>
+          <H3> Details preview</H3>
+          <p>Title : {{ blog.title }}</p>
+          <p>Description  : {{ blog.description}}</p>
+          
+
+        </div>    
+
   </div>
 </template>
 
 <script>
-import Student from './components/Student.vue'
-import Employee from './components/Employee.vue'
-export default {
-components:{
-  "student-form": Student,
-  "employee-form": Employee
-},
-  data () {
+
+export default{
+
+  data() {
     return {  
-        msg:"student-form"
+         blog:{
+              title:'',    
+              description:'',
+              user:''            
+           },
     }
   },
   methods:
   {
-     
+      postBlog:function()
+    {
+      this.$http.post("https://jsonplaceholder.typicode.com/posts",{
+        title:this.blog.title,
+        body:this.blog.description,
+        userID: this.blog.user
+      }).then(function(data)
+      {
+        console.log(data);
+      });
+    }
   }
 
 }

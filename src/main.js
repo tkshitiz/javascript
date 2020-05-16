@@ -1,16 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import student from './student.vue'
+import VueResource from 'vue-resource'
 
 
-/******************Global-Variable*************************/  
-Vue.component("student",student);
+/****************** VUE RESOURCES FOR HTTP REQUEST*************************/ 
+Vue.use(VueResource)
+/****************** VUE RESOURCES FOR HTTP REQUEST*************************/ 
 
-/******************Global-Variable*************************/  
-
-/******************Global instance-to-pass-receive-data*************************/  
-export const EventBus=new Vue();
-/******************Global instance-to-pass-receive-data*************************/  
 
 new Vue({
   el: '#app',
