@@ -9,12 +9,16 @@
   </div>
 </template> 
 <script>
+// ******************************LOCALLY DEFINED MIXINS***************************************************//
+import Filters from '../Mixins/Filters'
 export default{
+mixins:[Filters],
+// ******************************LOCALLY DEFINED MIXINS***************************************************//
   data () { 
     return {  
        blogs:[],
     
-    }
+    }   
   },
  
    created(){
@@ -25,19 +29,7 @@ export default{
       });
    },
   
-  // *********************Locally-defined-filter-format********************************//
-  //  filters:{
-  //    makeUpperCase: function(value)
-  //    {
-  //       return value.toUpperCase();
-  //    },
-
-  //    contentSnippet :function(value)
-  //    {
-  //       return value.slice(0,100)+"...";
-  //    }
-  //  }
-   // *********************end-of Locally-defined-filter-format********************************//
+  
 }
 
 </script>
