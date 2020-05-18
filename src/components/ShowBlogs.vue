@@ -3,28 +3,41 @@
   <div>
    <h3>Listing Blogs:</h3>
        <div v-for="blog in blogs">
-              <h3>{{blog.title}}</h3>
-              <p>{{blog.body}}</p>
+              <h3>{{blog.title | makeUpperCase}}</h3>
+              <p>{{blog.body | contentSnippet}}</p>              
        </div>
   </div>
-</template>
-
+</template> 
 <script>
 export default{
- 
   data () { 
     return {  
-       blogs:[]
+       blogs:[],
+    
     }
   },
  
    created(){
    this.$http.get("https://jsonplaceholder.typicode.com/posts").then(function(data)
       {
-          console.log(data)
+        console.log(data)
         this.blogs=data.body.slice(0,5)
       });
-   }
+   },
+  
+  // *********************Locally-defined-filter-format********************************//
+  //  filters:{
+  //    makeUpperCase: function(value)
+  //    {
+  //       return value.toUpperCase();
+  //    },
+
+  //    contentSnippet :function(value)
+  //    {
+  //       return value.slice(0,100)+"...";
+  //    }
+  //  }
+   // *********************end-of Locally-defined-filter-format********************************//
 }
 
 </script>
