@@ -28,7 +28,7 @@ Vue.filter("contentSnippet",function(value){
 //           return value.toUpperCase();
 //        },
   
-//        contentSnippet :function(value)
+//        contentSnippet :function(value) 
 //        {
 //           return value.slice(0,100)+"...";
 //        }
@@ -40,5 +40,6 @@ new Vue({
   el: '#app',
   render: h => h(App)
 })
+
 
 
