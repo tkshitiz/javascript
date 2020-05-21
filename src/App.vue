@@ -1,18 +1,22 @@
 <template>
 
   <div>
-    <show-blogs></show-blogs>
-     
+    <p>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+    <router-link to="/contact">Contact</router-link>
+    <router-link to="/services">Services</router-link>
+    </p>
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import ShowBlogs from './components/ShowBlogs.vue'
+
 
 export default{
-components:{
-"show-blogs":ShowBlogs
-},
+
   data() {
     return {  
 
@@ -29,7 +33,7 @@ components:{
 
 <style scoped>
 h3{
-  color:red;
+  color:rgb(24, 20, 20);
   font-size:30px
 }
 </style>
