@@ -9,7 +9,10 @@ Vue.use(VueRouter)
 
 
 const router =new VueRouter({
-  routes: Routes
+  routes: Routes,
+  
+  //******/ FOR REMOVING THE HASH IN THE URL SECTION*****//
+  mode:"history"
 })
 
 new Vue({
