@@ -1,30 +1,26 @@
 <template>
 
   <div>
-   <h3>Listing Blogs:</h3>
-       <div v-for="blog in blogs">
-              <h3>{{blog.title | makeUpperCase}}</h3>
-              <p>{{blog.body | contentSnippet}}</p>              
-       </div>
+   <h3>Show Blogs:</h3>
+     <div v-for="blog in blogs">
+     <router-link v-bind:to="'/blog'+'/'+blog.id">{{blog.title}}</router-link>     
+       <p>{{blog.body}}</p>
+       </div>  
   </div>
 </template> 
 <script>
-// ******************************LOCALLY DEFINED MIXINS***************************************************//
-import Filters from '../Mixins/Filters'
 export default{
-mixins:[Filters],
-// ******************************LOCALLY DEFINED MIXINS***************************************************//
+
   data () { 
     return {  
        blogs:[],
-    
     }   
   },
  
    created(){
    this.$http.get("https://jsonplaceholder.typicode.com/posts").then(function(data)
       {
-        console.log(data)
+         console.log(data)
         this.blogs=data.body.slice(0,5)
       });
    },

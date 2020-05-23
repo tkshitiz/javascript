@@ -7,6 +7,9 @@
     <router-link to="/contact">Contact</router-link>
     <router-link to="/services">Services</router-link>
     </p>
+    <p>
+      <showblogs></showblogs>
+    </p>
 
     <router-view></router-view>
   </div>
@@ -14,9 +17,11 @@
 
 <script>
 
-
+import ShowBlogs from './components/ShowBlogs'
 export default{
-
+components:{
+  'showblogs':ShowBlogs
+},
   data() {
     return {  
 
