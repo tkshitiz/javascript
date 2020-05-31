@@ -1,6 +1,7 @@
 <template>
 
   <div>
+  
     <p>
     <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link>
@@ -15,12 +16,12 @@
   </div>
 </template>
 
-<script>
-
+<script>  
 import ShowBlogs from './components/ShowBlogs'
 export default{
 components:{
   'showblogs':ShowBlogs
+  
 },
   data() {
     return {  

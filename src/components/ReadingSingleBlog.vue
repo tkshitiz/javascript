@@ -3,7 +3,7 @@
   <div>
    <h2>INDIVIDUAL BLOG:</h2>
       <h3>{{blog.title}}</h3>
-       <p>{{blog.body}}</p>
+       <p>{{blog.body}}</p> 
       
   </div>
 </template> 
@@ -19,8 +19,7 @@ export default{
  
    created(){
    this.$http.get("https://jsonplaceholder.typicode.com/posts/"+this.id).then(function(data)
-      {
-         
+      {        
         this.blog=data.body
       });
    },
