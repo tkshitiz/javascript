@@ -26,7 +26,7 @@
                </div>
             </div>
         </div>
-
+      <!-- REGISTERED USERS -->
         <div class="container">
            <div class="row mt-3">
               <div class="col-lg-6">
@@ -57,20 +57,21 @@
                         </tr>
                       </thead> 
 
-                      <tbody >
+                      <tbody  >
                          <tr class="text-center" v-for="user in users">
                          <td>{{user.id}}</td>
                          <td>{{user.name}} </td>
                          <td>{{user.email}}</td>
                          <td>{{user.phone_no}}</td>
-                         <td><a href="#" class="text-success"><i class="fas fa-edit"></i></a></td>
-                         <td><a href="#" class="text-danger"><i class="fas fa-trash-alt"></i></a></td>
+                         <td><a href="#" class="text-success"><i class="fas fa-edit" @click="editShowmsgDialog=true,fetchSingleData(user)"></i></a></td>
+                         <td><a href="#" class="text-danger"><i class="fas fa-trash-alt" @click="deleteUser(user.id)"></i></a></td>
                          </tr>
                       </tbody> 
                      </table> 
-                  </div>
-               </div>
-            </div>
+                 </div>
+              </div>
+          </div>
+         <!-- END-REGISTERED-USERS -->
 
             <!-- MESSAGE DIALOG BOX -->
                <div id="overlay" v-if="showmsgDialog">
@@ -100,12 +101,47 @@
                              <button type="submit"  class="btn btn-info btn-block btn-lg" @click="submitFormData" >Add User</button>
                            </div>
                          </form>
-                         </div>
-                      </div>
+                        </div>
+                      </div>                      
                    </div>
                  </div>
-               </div>
-         </div>
+                <!-- modal-dialog -->
+             
+              <!-- MESSAGE DIALOG BOX FOR UPDATE -->
+              <div id="overlay" v-if="editShowmsgDialog">
+                 <div class="modal-dialog">
+                   <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Edit New User</h5>
+                        <button type="button" class="close" @click="editShowmsgDialog=false">
+                           <span>&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body p-4">
+                         <form action ="" method="POST">
+                           <div class="form-group">
+                             <input type="text" name="name" v-model="currentUser.name" class="form-control form-control-lg" placeholder="Name">
+                           </div>
+
+                           <div class="form-group">
+                             <input type="text" name="email" v-model="currentUser.email" class="form-control form-control-lg" placeholder="email">
+                           </div>
+
+                           <div class="form-group">
+                             <input type="text" name="phone" v-model="currentUser.phone_no" class="form-control form-control-lg" placeholder="phone">
+                           </div>
+                              
+                           <div class="form-group">
+                             <button type="submit"  class="btn btn-info btn-block btn-lg" @click="updateUser()" >Update User</button>
+                           </div>
+                         </form>
+                        </div>
+                      </div>                      
+                   </div>
+                 </div>
+                <!-- END-MESSAGE DIALOG BOX FOR UPDATE-->
+              
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -116,32 +152,74 @@
       var app= new Vue({
       el:'#app',
       data: {
+        
         errorMsg: false,
         successMsg:false,
         showmsgDialog:false,
+        editShowmsgDialog:false,
          details:{ 
               fullname:'',
               email:'',
               phone:'',
               
               },
-              users:[]
+              users:[],
+              currentUser:{}
               
     },
     created()
       {
+        this.updateUser();
         this.getAllUsers();
+        
+        
       },
+      
 
     methods:{
      getAllUsers()
      {
+       
         axios.get('/learn-vue-cli/src/CRUD_VUE_PHP/getAllData.php')
         .then(response =>{
           console.log(response.data);
           this.users=response.data;
         })
      },
+
+    
+     updateUser()
+    {
+      
+                         
+      axios.post('/learn-vue-cli/src/CRUD_VUE_PHP/updateData.php',{
+        id:this.currentUser.id,
+        name:this.currentUser.name,
+        email:this.currentUser.email, 
+        phone:this.currentUser.phone_no
+      })
+        .then(response =>{
+          console.log(response.data);
+          
+        })
+    },
+
+
+    deleteUser(userID)
+    {
+       axios.get('/learn-vue-cli/src/CRUD_VUE_PHP/deleteData.php?id='+userID)
+        .then(response =>{
+          this.getAllUsers();
+          
+        })
+    },
+
+    
+    fetchSingleData(user)
+    {
+      this.currentUser=user;
+    },   
+
 
       submitFormData:function()
       {
