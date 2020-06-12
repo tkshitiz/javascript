@@ -1,21 +1,33 @@
 <?php
-
 include("connection.php");
-
-
 $method=$_SERVER['REQUEST_METHOD'];
 
-if($method="POST")
-{
-    $received_data= json_decode(file_get_contents("php://input"),true);
+if($method=="POST")
+{   
+    $id=$_POST['id']; 
+    $name=$_POST['name'];
+    $email=$_POST['email'];
+    $phone=$_POST['phone'];
+    $filename=$_FILES['image']['name'];
+    $valid_extensions = array("jpg","jpeg","png","pdf");
+    $extension = pathinfo($filename,PATHINFO_EXTENSION);
+    if(in_array(strtolower($extension),$valid_extensions) ) {
+      $imageName= "uploads/".$filename;
+        // Upload file
+       
+        if(file_exists($filename))
+            {
+              unlink($imageName);
+              move_uploaded_file($_FILES['image']['tmp_name'],$imageName);              
+            }
+            
+            
+        
+     }else{
+        echo 0;
+     }
 
-    $id=isset($received_data['id']) ? $received_data['id'] :'';
-    $name=isset($received_data['name']) ? $received_data['name'] :'';
-    $email=isset($received_data['email']) ? $received_data['email'] :'';
-    $phone=isset($received_data['phone']) ? $received_data['phone'] :'';
-
-
-$sql = "UPDATE student SET name='$name',email='$email',phone_no='$phone' WHERE id='$id'";
+$sql = "UPDATE student SET name='$name',email='$email',phone_no='$phone',image='$filename' WHERE id='$id'";
 
 if (mysqli_query($conn, $sql)) {
   echo "Record updated successfully";
@@ -26,8 +38,4 @@ if (mysqli_query($conn, $sql)) {
 mysqli_close($conn);
 
 }
-
-
-    
-
 ?>

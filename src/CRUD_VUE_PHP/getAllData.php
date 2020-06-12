@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
      $users[$i]['name']=$row["name"];
      $users[$i]['email']=$row["email"]; 
      $users[$i]['phone_no']=$row["phone_no"];
+     $users[$i]['image']=$row["image"];
      $i++;  
   }
   echo json_encode($users);

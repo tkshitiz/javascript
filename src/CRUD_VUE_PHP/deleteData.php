@@ -2,11 +2,13 @@
 
 include('connection.php');
 
-    $received_data= json_decode(file_get_contents("php://input"),true);
+$method=$_SERVER['REQUEST_METHOD'];
 
-    $id=isset($_GET['id']) ? $_GET['id'] :'';
+if($method=="POST")
+{
+  $received_data= json_decode(file_get_contents("php://input"),true); 
     
-
+    $id=isset($received_data['id']) ? $received_data['id'] :'';       
     $sql = "DELETE FROM student WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
@@ -17,6 +19,6 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 
-
+}
 
 ?>

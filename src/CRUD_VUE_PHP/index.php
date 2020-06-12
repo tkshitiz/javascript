@@ -39,8 +39,8 @@
               </div>
            </div>
              <hr class="bg-info">
-             <div class="alert alert-danger" v-if="errorMsg">Error Message</div>
-             <div class="alert alert-success" v-if="successMsg">Success</div>
+             <div class="alert alert-danger" v-if="errorMsg">Error</div>
+             <div class="alert alert-success" v-if="successMsg">{{successMsg}}</div>
             
             <!-- DISPLAYING RECORDS -->
             <div class="row">
@@ -52,22 +52,24 @@
                            <th>Name</th>
                            <th>Email</th>
                            <th>Phone</th>
+                           <th>Image</th>
                            <th>Edit</th>
                            <th>Delete</th>
                         </tr>
                       </thead> 
 
-                      <tbody  >
+                      <tbody>
                          <tr class="text-center" v-for="user in users">
-                         <td>{{user.id}}</td>
+                         <td>{{user.id}}</td> 
                          <td>{{user.name}} </td>
                          <td>{{user.email}}</td>
                          <td>{{user.phone_no}}</td>
+                         <td><img :src="'uploads/'+user.image" width="70" height="70"/></td>
                          <td><a href="#" class="text-success"><i class="fas fa-edit" @click="editShowmsgDialog=true,fetchSingleData(user)"></i></a></td>
-                         <td><a href="#" class="text-danger"><i class="fas fa-trash-alt" @click="deleteUser(user.id)"></i></a></td>
+                         <td><a href="#" class="text-danger"><i class="fas fa-trash-alt" @click="deleteDialog=true,fetchSingleData(user)"></i></a></td>
                          </tr>
-                      </tbody> 
-                     </table> 
+                      </tbody>
+                     </table>
                  </div>
               </div>
           </div>
@@ -84,7 +86,7 @@
                         </button>
                       </div>
                       <div class="modal-body p-4">
-                         <form action ="" method="POST">
+                         <form action ="<?php echo $SERVER["PHP_SELF"];?>" method="POST" enctype="multipart/form-data">
                            <div class="form-group">
                              <input type="text" name="name" v-model="details.fullname" class="form-control form-control-lg" placeholder="Name">
                            </div>
@@ -96,10 +98,14 @@
                            <div class="form-group">
                              <input type="text" name="phone" v-model="details.phone" class="form-control form-control-lg" placeholder="phone">
                            </div>
+                           
+                           <div class="form-group">
+                             <input type="file" id="file" ref="file">
+                           </div>
 
                            <div class="form-group">
                              <button type="submit"  class="btn btn-info btn-block btn-lg" @click="submitFormData" >Add User</button>
-                           </div>
+                           </div>                           
                          </form>
                         </div>
                       </div>                      
@@ -118,7 +124,7 @@
                         </button>
                       </div>
                       <div class="modal-body p-4">
-                         <form action ="" method="POST">
+                         <form action ="<?php echo $SERVER["PHP_SELF"];?>" method="POST">
                            <div class="form-group">
                              <input type="text" name="name" v-model="currentUser.name" class="form-control form-control-lg" placeholder="Name">
                            </div>
@@ -130,7 +136,12 @@
                            <div class="form-group">
                              <input type="text" name="phone" v-model="currentUser.phone_no" class="form-control form-control-lg" placeholder="phone">
                            </div>
-                              
+
+                           <div class="form-group">
+                             <input type="file" ref="file">
+                             <img :src="'uploads/'+currentUser.image" width="70" height="70"/>
+                           </div>
+
                            <div class="form-group">
                              <button type="submit"  class="btn btn-info btn-block btn-lg" @click="updateUser()" >Update User</button>
                            </div>
@@ -140,9 +151,32 @@
                    </div>
                  </div>
                 <!-- END-MESSAGE DIALOG BOX FOR UPDATE-->
-              
+
+            <!-- END-MESSAGE DIALOG BOX FOR DELETE--> 
+                <div id="overlay" v-if="deleteDialog">
+                  <div class="modal-dialog">
+                   <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Delete User</h5>
+                        <button type="button" class="close" @click="deleteDialog=false">
+                           <span>&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body p-4">
+                        <h4>Are you sure you want to delete?</h4>
+                        <hr>
+                        <button class="btn btn-success btn-lg" @click="deleteUser()">Yes</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-danger btn-lg" @click="deleteDialog=false">No</button>
+                      </div>
+                    </div>
+                    </div>
+                 </div>
+                 <!-- END-MESSAGE DIALOG BOX FOR DELETE-->
 
     </div>
+    <!-- END OF PHP PART WITH ID=APP FOR VUEJS -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
@@ -153,10 +187,12 @@
       el:'#app',
       data: {
         
-        errorMsg: false,
-        successMsg:false,
+        file:'',
+        errorMsg: "",
+        successMsg:"",
         showmsgDialog:false,
         editShowmsgDialog:false,
+        deleteDialog:false,
          details:{ 
               fullname:'',
               email:'',
@@ -167,14 +203,10 @@
               currentUser:{}
               
     },
-    created()
+    afterCreated()
       {
-        this.updateUser();
-        this.getAllUsers();
-        
-        
-      },
-      
+        this.getAllUsers();    
+      },     
 
     methods:{
      getAllUsers()
@@ -182,79 +214,93 @@
        
         axios.get('/learn-vue-cli/src/CRUD_VUE_PHP/getAllData.php')
         .then(response =>{
-          console.log(response.data);
+          // console.log(response.data);
           this.users=response.data;
         })
      },
-
     
      updateUser()
-    {
-      
-                         
-      axios.post('/learn-vue-cli/src/CRUD_VUE_PHP/updateData.php',{
-        id:this.currentUser.id,
-        name:this.currentUser.name,
-        email:this.currentUser.email, 
-        phone:this.currentUser.phone_no
-      })
-        .then(response =>{
-          console.log(response.data);
-          
+    {  
+      this.file = this.$refs.file.files[0];
+  
+         let formData = new FormData();
+         formData.append('image', this.file);
+         formData.append('name', this.currentUser.name);
+         formData.append('email', this.currentUser.email);
+         formData.append('phone', this.currentUser.phone_no);
+         formData.append('id', this.currentUser.id);                        
+      axios.post('/learn-vue-cli/src/CRUD_VUE_PHP/updateData.php',formData
+        
+      )
+        .then(response =>{         
+             console.log(response.data);
+          if(response.data)
+          {
+            this.successMsg=response.data;
+            this.getAllUsers();
+          }
+          else{
+            this.errorMsg='';
+          }
         })
     },
 
-
-    deleteUser(userID)
-    {
-       axios.get('/learn-vue-cli/src/CRUD_VUE_PHP/deleteData.php?id='+userID)
-        .then(response =>{
-          this.getAllUsers();
-          
-        })
-    },
-
-    
     fetchSingleData(user)
-    {
-      this.currentUser=user;
+    {     
+      this.currentUser=user;    
     },   
 
+    deleteUser()
+    {      
+        axios.post('/learn-vue-cli/src/CRUD_VUE_PHP/deleteData.php',{
+          id:this.currentUser.id
+        })
+        .then(response =>{
+          // console.log(response.data)
+          if(response.data){
+            this.deleteDialog=false
+            this.successMsg=response.data
+             this.getAllUsers();             
+          }
+        })
+    },
 
       submitFormData:function()
       {
-         if(this.details.fullname!=''&& this.details.email!=''&& this.details.phone!='')
-           {
-            var bodyFormData = new FormData();
-            bodyFormData.set('name',this.details.fullname);
-            bodyFormData.set('email',this.details.email);
-            bodyFormData.set('phone',this.details.phone);            
-            axios({
-              
-              url:'/learn-vue-cli/src/CRUD_VUE_PHP/process.php',
-              method:'POST',
-              action:'insert',
-              data: bodyFormData,              
-              
-            }).then(function(response){
-              console.log(response.data);
-            })
-            .catch(function (error) {
-               console.log(error);
-            });
-            
-             
+        if(this.details.fullname!=''&& this.details.email!=''&& this.details.phone!='')
+           {   
+            this.file = this.$refs.file.files[0];
+  
+         let formData = new FormData();
+         formData.append('image', this.file);
+         formData.append('name', this.details.fullname);
+         formData.append('email', this.details.email);
+         formData.append('phone', this.details.phone);                   
+          axios.post('/learn-vue-cli/src/CRUD_VUE_PHP/process.php',
+            formData,
+          )
+        .then(response =>{      
+          console.log(response.data)   
+          if(response.data)
+          {
+            this.successMsg=response.data;
+            this.getAllUsers();
+            this.details.fullname="",
+            this.details.email="",
+            this.details.phone=""
+          }
+          else{
+            // alert("file not uploaded")
+            this.errorMsg='';
+          }
+        })                 
            }
-
            else{
-            
               alert("Fill all fields");
+              this.showmsgDialog=false
               
            }
       },
-      
-
-
     }
 })
      </script>
